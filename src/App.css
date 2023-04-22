@@ -1,0 +1,8 @@
+.control{
+    position: fixed;
+    bottom: 10px;
+    left: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
