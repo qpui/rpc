@@ -1,10 +1,8 @@
-import {FunctionComponent, useEffect, useRef, useState} from "react";
+import {Dispatch, FunctionComponent, SetStateAction, useEffect, useRef, useState} from "react";
 import {useWindowDimensions} from "./shared.tsx";
+import {ComponentCoordinateT} from "./App.tsx";
 
-// import {ComponentCoordinateT} from "./App.tsx";
-
-export function WithActive(Component: FunctionComponent, x = 1, y = 0) {
-  //_cb: Dispatch<SetStateAction<Set<ComponentCoordinateT>>>
+export function WithActive(Component: FunctionComponent, id: number, type: number, cb: Dispatch<SetStateAction<Map<number, ComponentCoordinateT>>>, x = 1, y = 0) {
   const windowSize = useWindowDimensions();
   const [xState, setX] = useState(x);
   const [yState, setY] = useState(y);
@@ -12,8 +10,8 @@ export function WithActive(Component: FunctionComponent, x = 1, y = 0) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // let myX: number | null;
-      // let myY: number | null;
+      let myX: number | null;
+      let myY: number | null;
       setX((x) => {
         let response: number | null;
         if (x < 1 || x >= windowSize.width) {
@@ -26,7 +24,7 @@ export function WithActive(Component: FunctionComponent, x = 1, y = 0) {
             response = x - random
           }
         }
-        // myX = response;
+        myX = response;
         return response
       });
       setY((y) => {
@@ -41,16 +39,20 @@ export function WithActive(Component: FunctionComponent, x = 1, y = 0) {
         } else {
           response = 1;
         }
-        // myY = response;
+        myY = response;
         return response
       });
-      // setTimeout(() => {
-      //   cb((value) => value.add({
-      //     y: myY!,
-      //     x: myX!,
-      //     t: type
-      //   }))
-      // });
+
+      setTimeout(()=> {
+        cb((value) => {
+          value.set(id, {
+            id, y: myY!, x: myX!, t: type
+          });
+          console.log(value);
+          return value;
+        })
+      }, 100)
+
     }, 600);
     return () => clearInterval(interval);
   }, [])
