@@ -1,7 +1,7 @@
 import {Paper} from "./paper.tsx";
 import {Rock} from "./rock.tsx";
 import {Scissor} from "./scissor.tsx";
-import {WithActive} from "../hoc-active.tsx";
+import {WithActive} from "./hoc-active.tsx";
 
 interface SvgComponentI {
   priority: 0 | 1 | 2

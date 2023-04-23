@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import mp3 from './assets/4653666681487360.wav'
-import {SvgComponent} from "./assets/SvgComponent.tsx";
+import {SvgComponent} from "./SvgComponent.tsx";
 import './App.css'
 
 // export type ComponentCoordinateT = {
@@ -15,18 +15,18 @@ function App() {
   // const [_coordinate, setCoordinate] = useState<Set<ComponentCoordinateT>>(new Set())
   const audio = new Audio(mp3);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     audio.play();
-  //   })
-  //   return () => clearInterval(interval);
-  // }, [musicPlay])
+  useEffect(() => {
+    const interval = setInterval(() => {
+      audio.play();
+    })
+    return () => clearInterval(interval);
+  }, [musicPlay])
 
   return (
     <>
       {
-        Array.from(Array(count ), (_e, id) => {
-          const priority= (id % 3) as 1|2|0
+        Array.from(Array(count), (_e, id) => {
+          const priority = (id % 3) as 1 | 2 | 0
           return <SvgComponent key={id} id={id} priority={priority}></SvgComponent>
         })
       }
