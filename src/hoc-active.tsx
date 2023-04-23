@@ -1,8 +1,10 @@
-import {Dispatch, FunctionComponent, SetStateAction, useEffect, useRef, useState} from "react";
+import {FunctionComponent, useEffect, useRef, useState} from "react";
 import {useWindowDimensions} from "./shared.tsx";
-import {ComponentCoordinateT} from "./App.tsx";
 
-export function WithActive(Component: FunctionComponent, x = 1, y = 0, cb: Dispatch<SetStateAction<Set<ComponentCoordinateT>>>, type: number) {
+// import {ComponentCoordinateT} from "./App.tsx";
+
+export function WithActive(Component: FunctionComponent, x = 1, y = 0) {
+  //_cb: Dispatch<SetStateAction<Set<ComponentCoordinateT>>>
   const windowSize = useWindowDimensions();
   const [xState, setX] = useState(x);
   const [yState, setY] = useState(y);
